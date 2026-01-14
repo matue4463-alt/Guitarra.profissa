@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Guitarra Virtual</title>
+  <meta charset="UTF-8">
+  <title>🎸 Guitarra Virtual</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-  #recipiente {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-  }
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+    }
 
-  svg {
-    width: 100%;
-    max-height: 400px;
-  }
+    #recipiente {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
 
-  .corda {
-    stroke: #ddd;
-    stroke-width: 2;
-    transition: stroke 0.1s;
-  }
+    svg {
+      width: 100%;
+      max-height: 400px;
+    }
 
-  .corda.ativa {
-    stroke: #f39c12;
-    stroke-width: 3;
-  }
+    .corda {
+      stroke: #ddd;
+      stroke-width: 2;
+      transition: stroke 0.1s, stroke-width 0.1s;
+      pointer-events: all;
+    }
 
-  .traste {
-    stroke: #aaa;
-    stroke-width: 2;
-  }
+    .corda.ativa {
+      stroke: #f39c12;
+      stroke-width: 3;
+    }
 
-  .controle {
-    margin-top: 15px;
-  }
-</style>
+    .traste {
+      stroke: #aaa;
+      stroke-width: 2;
+    }
+
+    .controle {
+      margin-top: 20px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
-
 <div id="recipiente">
+
   <h1>🎸 Guitarra Virtual</h1>
 
   <!-- GUITARRA -->
   <svg viewBox="0 0 1000 300">
-
     <!-- Braço -->
     <rect x="100" y="60" width="800" height="180" rx="20" fill="#6d4c2f"/>
 
@@ -68,23 +79,27 @@
       <line class="corda" data-corda="5" x1="100" y1="210" x2="900" y2="210"/>
       <line class="corda" data-corda="6" x1="100" y1="240" x2="900" y2="240"/>
     </g>
-
   </svg>
 
   <!-- CONTROLES -->
   <div class="controle">
     <label for="afinacao">Afinar:</label><br>
     <input type="range" min="0.9" max="1.1" step="0.01" value="1" id="afinacao">
+
+    <br><br>
+
+    <label>Enviar áudio (MP3/WAV):</label><br>
+    <input type="file" id="audioFile" accept="audio/*">
   </div>
+
 </div>
 
 <!-- SOM REAL DE GUITARRA -->
 <script src="https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js"></script>
 <script src="https://surikov.github.io/webaudiofontdata/sound/0280_LesPaul_sf2.js"></script>
 
+<!-- SEU JS -->
 <script src="main.js"></script>
-  <br><br>
-<label>Enviar áudio (MP3/WAV):</label><br>
-<input type="file" id="audioFile" accept="audio/*">
+
 </body>
 </html>
