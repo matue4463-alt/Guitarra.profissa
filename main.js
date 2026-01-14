@@ -1,17 +1,18 @@
-console.log("🎸 main.js carregado");
+cordas.forEach((corda, index) => {
+  corda.addEventListener("pointerdown", (e) => {
 
-// Carregar arquivos JSON
-async function carregarJSON(nome) {
-  const res = await fetch(nome);
-  return res.json();
-}
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
 
-async function iniciar() {
-  const config = await carregarJSON("config.json");
-  const midiMap = await carregarJSON("midiMap.json");
+    const rect = corda.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    const traste = Math.floor(pos * 12);
 
-  console.log("Config:", config);
-  console.log("MIDI Map:", midiMap);
-}
+    const freq = afinacoes[index] * Math.pow(2, traste / 12);
+    const midi = freqParaMidi(freq);
 
-iniciar();
+    tocarNota(midi, 1);
+    animarCorda(corda);
+  });
+});
